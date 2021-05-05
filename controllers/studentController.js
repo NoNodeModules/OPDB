@@ -3,7 +3,6 @@
 const firebase = require('../db');
 const Student = require('../models/student');
 const firestore = firebase.firestore();
-const jwt = require('jsonwebtoken');
 
 
 const loginStudent = async (req, res, next) => {
@@ -30,7 +29,7 @@ const addStudent = async (req, res, next) => {
     try {
         const data = req.body;
         await firestore.collection('StudentAccounts').doc(data.id).set(data);
-        await firestore.collection('Section').doc(data.sectionName).collection('student').doc(data.id).set(data);
+        await firestore.collection('Section').doc(data.sectionName).collection('students').doc(data.id).set(data);
         res.send('Record saved successfuly');
     } catch (error) {
         res.status(error.status);
@@ -75,10 +74,11 @@ const getStudent = async (req, res, next) => {
 
 const updateStudent = async (req, res, next) => {
     try {
-        const id = req.params.id;
         const data = req.body;
-        const student =  await firestore.collection('StudentAccounts').doc(id);
+        const student =  await firestore.collection('StudentAccounts').doc(data.id);
         await student.update(data);
+        const sectionStudent = await firestore.collection('Section').doc(data.sectionName).collection('student').doc(data.id);
+        await sectionStudent.update(data);
         res.send('Student record updated successfuly');        
     } catch (error) {
         res.status(400).send(error.message);
