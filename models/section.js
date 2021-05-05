@@ -1,5 +1,5 @@
 class Section {
-    constructor(id, firstName, lastName, middleInitial, personalEmail, sectionName, suffix, yearLevel, subject, score)
+    constructor(id, firstName, lastName, middleInitial, studentNumber, sectionID, personalEmail, sectionName, suffix, yearLevel, subject, score)
     {
         this.id = id;
         this.firstName = firstName;
@@ -12,6 +12,9 @@ class Section {
         this.yearLevel = yearLevel;
         this.subject = subject;
         this.score = score;
+        this.studentNumber = studentNumber;
+        this.sectionID = sectionID;
     }
+}
 
-}w
+module.exports = Section;

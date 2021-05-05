@@ -13,6 +13,13 @@ const {
     getTeacher,
     updateTeacher,
     deleteTeacher} = require('../controllers/teacherController');
+
+const {   
+    addsectionStudent,
+    addSection,
+    showStudents,
+    getsectionStudent,
+    updatesectionStudent} = require('../controllers/sectionController')
 const router = express.Router();
 
 router.post('/student/login', loginStudent)
@@ -29,6 +36,12 @@ router.get('/teachers', getAllTeachers);
 router.get('/teacher/:id', getTeacher);
 router.put('/teacher/:id', updateTeacher);
 router.delete('/teacher/:id', deleteTeacher);
+
+router.post('/section/student', addsectionStudent);
+router.get('/section/students', showStudents);
+router.get('/section/student/:id', getsectionStudent);
+router.put('/section/student/:id', updatesectionStudent);
+router.post('/section',addSection);
 
 module.exports = {
     routes: router
