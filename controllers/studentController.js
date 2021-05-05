@@ -25,10 +25,12 @@ const loginStudent = async (req, res, next) => {
         res.status(400).send('ID or Password does not match');
     }
 }
+
 const addStudent = async (req, res, next) => {
     try {
         const data = req.body;
         await firestore.collection('StudentAccounts').doc(data.id).set(data);
+        await firestore.collection('Section').doc(data.sectionName).collection('student').doc(data.id).set(data);
         res.send('Record saved successfuly');
     } catch (error) {
         res.status(error.status);
