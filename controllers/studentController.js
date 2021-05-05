@@ -17,7 +17,7 @@ const loginStudent = async (req, res, next) => {
        {
            return  res.send('ID or Password does not match');
        }
-       res.send({message: "Login Successfully"});
+       res.send('True');
 
     } catch (error) {
         res.status(400).send('ID or Password does not match');
@@ -29,7 +29,7 @@ const addStudent = async (req, res, next) => {
         const data = req.body;
         await firestore.collection('StudentAccounts').doc(data.id).set(data);
         await firestore.collection('Section').doc(data.sectionName).collection('students').doc(data.id).set(data);
-        res.send('Record saved successfuly');
+        res.send('True');
     } catch (error) {
         res.status(error.status);
     }
@@ -70,7 +70,7 @@ const getStudent = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
-
+//uppp
 const updateStudent = async (req, res, next) => {
     try {
         const data = req.body;
