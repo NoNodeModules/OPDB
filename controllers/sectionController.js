@@ -1,4 +1,4 @@
-'use strict';
+
 const firebase = require('../db');
 const Student = require('../models/section');
 const firestore = firebase.firestore();
@@ -26,7 +26,8 @@ const addSection = async (req, res, next) => {
 
 const showStudents = async (req, res, next) => {
     try {
-        const students = firestore.collection('Section').doc(data.sectionName).collection('students');
+        const datas =req.body;
+        const students = await firestore.collection('Section').doc(datas.sectionName).collection('students');
         const data = await students.get()
         const studentsArray = [];
         if(data.empty) {
